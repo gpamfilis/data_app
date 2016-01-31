@@ -7,7 +7,6 @@
 
 from flask import Flask, render_template, send_file, url_for
 import mdd_downloader
-import time
 import shutil
 # Initialize the Flask application
 app = Flask(__name__)
@@ -27,7 +26,7 @@ def index():
 #     return render_template('loading.html')
 # # This route will prompt a file download with the csv lines
 
-@app.route('/mdd', methods=['GET', 'POST'])
+@app.route('/mdd')
 def mdd():
     # ajax_index()
     mdd_downloader.MeteorologicalDataDownloader().main()
