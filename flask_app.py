@@ -52,7 +52,7 @@ def download():
 
 # @app.route('/download')
 # def download():
-#     csvList = open('uploads/data.csv')
+#     csvList = open('uploads/data.csv')dd
 #     csvList = '\n'.join(','.join(row) for row in csvList)
 #     response = make_response(open(csvList).readlines())
 #     # This is the key: Set the right header for the response
