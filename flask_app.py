@@ -7,7 +7,7 @@
 import io,csv
 
 from flask import Flask, render_template, send_file, url_for
-
+import mdd_downloader
 import time
 # Initialize the Flask application
 app = Flask(__name__)
@@ -29,15 +29,17 @@ def index():
 @app.route('/mdd', methods=['GET', 'POST'])
 def mdd():
     # ajax_index()
-
+    mdd_downloader.MeteorologicalDataDownloader().main()
     time.sleep(5)
     return render_template('mdd.html')
 
 
 @app.route("/downloads")
 def download():
+    import shutil
+    shutil.make_archive('uploads/data', 'zip', './data')
     url_for('index')
-    return send_file('uploads/datazip.zip',
+    return send_file('uploads/data.zip',
                      mimetype='text/zip',
                      attachment_filename='data.zip',
                      as_attachment=True)
