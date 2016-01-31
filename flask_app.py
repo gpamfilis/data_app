@@ -8,7 +8,7 @@
 from flask import Flask, render_template, send_file, url_for
 import mdd_downloader
 import time
-import os
+import shutil
 # Initialize the Flask application
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -31,19 +31,13 @@ def index():
 def mdd():
     # ajax_index()
     mdd_downloader.MeteorologicalDataDownloader().main()
-    time.sleep(5)
     return render_template('mdd.html')
 
 
 @app.route("/downloads")
 def download():
-    import shutil
     shutil.make_archive('uploads/data', 'zip', './data')
-    if not os.path.exists(data_folder):
-        os.makedirs(data_folder)
-    else:
-        shutil.rmtree(data_folder)
-        os.makedirs(data_folder)
+    shutil.rmtree(data_folder)
     url_for('index')
     return send_file('uploads/data.zip',
                      mimetype='text/zip',
