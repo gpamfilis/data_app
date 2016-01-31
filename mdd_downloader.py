@@ -43,7 +43,7 @@ class MeteorologicalDataDownloader:
         self.year_to = year_to
         self.dates_to_download = []
         self.location = location
-        self.stations = pd.read_csv('locations/'+self.location+'.txt')  # in this location there are stations
+        self.stations = pd.read_csv('./locations/' + self.location + '.txt')  # in this location there are stations
 
     def dates_for_program(self):
         """
@@ -65,7 +65,7 @@ class MeteorologicalDataDownloader:
         """
         for station in self.stations['stations'][:]:
             try:
-                os.mkdir('./data/'+station)
+                os.mkdir('./data/' + station)
                 # os.mkdir(os.path.join(os.getcwd(), data_folder)+'/'+station)  # messy!!!
             except:
                 # add logging and fix exceptions too broad
