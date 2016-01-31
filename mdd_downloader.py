@@ -51,7 +51,7 @@ class MeteorologicalDataDownloader:
         be stored from now to then. in a year-month format.
         """
         years = self.year_to - self.year_from  # number of years between now and then
-        for i in range(years*12):
+        for i in range(years * 12):
             now = datetime.datetime.now()
             before = now + dateutil.relativedelta.relativedelta(months=-i)
             self.dates_to_download.append(str(before)[0:7])
@@ -65,25 +65,25 @@ class MeteorologicalDataDownloader:
         """
         for station in self.stations['stations'][:]:
             try:
-                os.mkdir('./data/' + station)
-                # os.mkdir(os.path.join(os.getcwd(), data_folder)+'/'+station)  # messy!!!
+                # os.mkdir('./data/' + station)
+                os.mkdir(os.path.join(os.getcwd(), data_folder) + '/' + station)  # messy!!!
             except:
                 # add logging and fix exceptions too broad
                 print('directory: {0} all ready exists!!!'.format(station))
                 pass
             testfile = URLopener()
-            # os.chdir(data_folder + '/' + station)
+            os.chdir(data_folder + '/' + station)
             for i, date in enumerate(self.dates_to_download):
-                # name_to_save_file = os.getcwd() + '/' + station + '-' + date + '.txt'
-                # print(os.getcwd())
+                name_to_save_file = os.getcwd() + '/' + station + '-' + date + '.txt'
+                print(os.getcwd())
                 try:
                     #  this is the complete url to visit and download its contents
                     url = url_seed + station + '/' + date + '.txt'
-                    testfile.retrieve(url, './data/' + station + '/' + station + '-' + date + '.txt')
+                    testfile.retrieve(url, name_to_save_file)
                 except:
                     pass
-            # os.chdir(os.pardir)
-            # os.chdir(os.pardir)
+            os.chdir(os.pardir)
+            os.chdir(os.pardir)
 
     def main(self):
         if not os.path.exists(data_folder):
