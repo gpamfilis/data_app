@@ -4,15 +4,16 @@
 # To ilustrate this, the default route will print a CSV file
 # while the download route will open a "Save as..." dialog
 # Browse the /download route to see it in action
-import io,csv
 
 from flask import Flask, render_template, send_file, url_for
 import mdd_downloader
 import time
+import os
 # Initialize the Flask application
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.secret_key = 'some_secret'
+data_folder = 'data'
 
 
 @app.route('/')
@@ -38,6 +39,11 @@ def mdd():
 def download():
     import shutil
     shutil.make_archive('uploads/data', 'zip', './data')
+    if not os.path.exists(data_folder):
+        os.makedirs(data_folder)
+    else:
+        shutil.rmtree(data_folder)
+        os.makedirs(data_folder)
     url_for('index')
     return send_file('uploads/data.zip',
                      mimetype='text/zip',
