@@ -14,6 +14,7 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.secret_key = 'some_secret'
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
