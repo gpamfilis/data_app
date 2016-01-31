@@ -20,6 +20,7 @@ while the location referring to a location. now its mixed up.
 '''
 
 
+
 class MeteorologicalDataDownloader:
     """
     This is the meteorological data downloader class used to download data from the meteo.gr website.
@@ -39,6 +40,7 @@ class MeteorologicalDataDownloader:
     """
 
     def __init__(self, year_from=2014, year_to=2015, location='crete'):
+        os.chdir(os.path.dirname(os.path.realpath(__file__)))
         self.year_from = year_from
         self.year_to = year_to
         self.dates_to_download = []
