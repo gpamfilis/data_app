@@ -62,7 +62,7 @@ class MeteorologicalDataDownloader:
     def download_file(self):
         """
         this function will visit a url for a specific location, enter the date
-        and save the file to a specified directory
+        and save the file to a specdified directory
         # http://penteli.meteo.gr/meteosearch/data/aghiosnikolaos/2009-11.txt
         """
         for station in self.stations['stations'][:]:
